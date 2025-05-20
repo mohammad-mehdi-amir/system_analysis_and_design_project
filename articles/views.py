@@ -34,7 +34,7 @@ def article_detail_view(request, id):
 def article_search_view(request):
     q = request.GET.get('q', '')
     articles = Article.objects.filter(title__icontains=q, status='approved')
-    data = [{'id': a.id, 'title': a.title} for a in articles]
+    data = [{'id': a.id, 'title': a.title,'text':a.text,'author':a.author.first_name+' '+a.author.last_name,'date':a.datetime_add} for a in articles]
     return JsonResponse(data, safe=False)
 
 # ساخت مقاله
